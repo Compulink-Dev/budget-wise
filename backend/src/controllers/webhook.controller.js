@@ -1,4 +1,5 @@
 // controllers/webhook.controller.js
+import { verifyWebhookSignature } from "../config/webhookVerfication.js";
 import User from "../models/user.models.js";
 import crypto from "crypto";
 
@@ -17,6 +18,9 @@ export const clerkWebhook = async (req, res) => {
 
     // You should verify the webhook signature here using your webhook secret
     // For now, we'll skip verification in development
+    if (!verifyWebhookSignature(payload, req.headers)) {
+      return res.status(401).json({ message: "Invalid webhook signature" });
+    }
 
     const { type, data } = req.body;
 
