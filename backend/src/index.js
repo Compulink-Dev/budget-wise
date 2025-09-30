@@ -4,6 +4,7 @@ import connectDB from "./config/database.js";
 import userRoutes from "./routes/user.route.js";
 import transactionRoutes from "./routes/transaction.route.js";
 import ratelimiter from "./middlewares/rate_limiter.js";
+import webhookRoutes from "./routes/webhook.route.js";
 
 dotenv.config();
 
