@@ -16,11 +16,12 @@ connectDB();
 
 const app = express();
 
+// Webhook route (must come before other middleware)
+app.use("/webhook", webhookRoutes);
+
 //middleware
 app.use(ratelimiter);
 app.use(express.json());
-// Webhook route (must come before other middleware)
-app.use("/webhook", webhookRoutes);
 
 app.get("/", (req, res) => {
   res.send("Hello");

@@ -3,8 +3,7 @@ import mongoose from "mongoose";
 const transactionSchema = new mongoose.Schema(
   {
     userId: {
-      type: mongoose.Schema.Types.ObjectId,
-      ref: "User", // Reference to User model
+      type: String, // <-- Store Clerk userId as string
       required: true,
     },
     title: { type: String, required: true },
@@ -14,6 +13,8 @@ const transactionSchema = new mongoose.Schema(
   { timestamps: true }
 );
 
-const Transaction = mongoose.model("Transaction", transactionSchema);
+const Transaction =
+  mongoose.models.Transaction ||
+  mongoose.model("Transaction", transactionSchema);
 
 export default Transaction;
