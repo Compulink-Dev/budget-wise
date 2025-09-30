@@ -16,7 +16,7 @@ const CATEGORY_ICONS = {
 };
 
 export const TransactionItem = ({ item, onDelete }: any) => {
-  const isIncome = parseFloat(item.amount) > 0;
+  const isIncome = item.category === "income"; // ✅ based on category
   //@ts-ignore
   const iconName = CATEGORY_ICONS[item.category] || "pricetag-outline";
 
@@ -45,7 +45,8 @@ export const TransactionItem = ({ item, onDelete }: any) => {
             {Math.abs(parseFloat(item.amount)).toFixed(2)}
           </Text>
           <Text style={styles.transactionDate}>
-            {formatDate(item.created_at)}
+            {formatDate(item.createdAt)}{" "}
+            {/* ✅ use createdAt, not created_at */}
           </Text>
         </View>
       </TouchableOpacity>

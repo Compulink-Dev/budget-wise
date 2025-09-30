@@ -20,6 +20,9 @@ export const useTransactions = (userId: any) => {
   const fetchTransactions = useCallback(async () => {
     try {
       const response = await fetch(`${API_URL}/transactions/user/${userId}`);
+
+      console.log("User transaction : ", response);
+      
       const data = await response.json();
       setTransactions(data);
     } catch (error) {

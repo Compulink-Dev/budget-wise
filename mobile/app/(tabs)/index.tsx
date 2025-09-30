@@ -22,15 +22,20 @@ import LoadingSpinner from "@/components/loading-spinner";
 
 export default function Page() {
   const { user } = useUser();
+
+  console.log("User id : ", user?.id);
+
   const router = useRouter();
   const [refreshing, setRefreshing] = useState(false);
 
   const { transactions, summary, isLoading, loadData, deleteTransaction } =
     useTransactions(user?.id);
 
-  console.log("User : ", user);
+  console.log("User id : ", user?.id);
 
-  console.log("Summary transaction : ", summary);
+  console.log("Summary : ", summary);
+
+  console.log("Transaction : ", transactions);
 
   const onRefresh = async () => {
     setRefreshing(true);

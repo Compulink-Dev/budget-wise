@@ -107,13 +107,13 @@ export const getTransactionSummary = async (req, res) => {
   const { userId } = req.params;
 
   try {
-    // Validate userId
-    if (!mongoose.Types.ObjectId.isValid(userId)) {
-      return res.status(400).json({ message: "Invalid user ID" });
+    // Remove MongoDB ObjectId validation since Clerk userIds are strings
+    if (!userId) {
+      return res.status(400).json({ message: "User ID is required" });
     }
 
     const summary = await Transaction.aggregate([
-      { $match: { userId: new mongoose.Types.ObjectId(userId) } },
+      { $match: { userId: userId } },
       {
         $group: {
           _id: null,
